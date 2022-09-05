@@ -1,10 +1,10 @@
-#include "EEPROM.h"
-#include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "debug.h"          // Necesario para las llamadas de depuración.
-#include "DHT.h"            // Control sensores DHT.
-#include "Time.h"           // Control de horas y tiempos, ademas del rtc.
-#include "estructuras.h"
-#include "cAPPconfig.h"
+#include "src\lib\EEPROM.h"
+#include "src\hal\configurations.h" // Guarda los datos por defecto del equipo.
+#include "utility\Debug.h"          // Necesario para las llamadas de depuración.
+#include "src\lib\DHT.h"            // Control sensores DHT.
+#include "src\lib\Time.h"           // Control de horas y tiempos, ademas del rtc.
+#include "src\estructuras.h"
+#include "utility\cAPPconfig.h"
 #include <Arduino.h> // STD de arduino.
 
 void cAppConfig::begin()

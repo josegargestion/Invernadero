@@ -9,12 +9,10 @@
  * @todo
  *
  * */
-#include "Debug.h"
-#include "Time.h"
-#include "DS1307RTC.h"
-#include "ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
-#include "invernadero.h"    // Clase maestra de control del sistema.
-#include <Arduino.h>        // STD de arduino.
+#include "utility\Debug.h"          // Biblioteca de macros de errores.
+#include "src\ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
+#include "src\invernadero.h"        // Clase maestra de control del sistema.
+#include <Arduino.h>            // STD de arduino.
 Inver Inver1;
 millis_set mainMillis;
 void setup()

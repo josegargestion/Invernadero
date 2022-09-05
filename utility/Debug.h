@@ -7,8 +7,8 @@
  * @todo - Construccion de funciones de depuracion.
  * 
  */
-#include "Time.h"
-#include "configurations.h"    // Necesario para las llamadas de depuración.
+#include "..\src\lib\Time.h"
+#include "..\src\hal\configurations.h"    // Necesario para las llamadas de depuración.
 #include <Arduino.h>		// STD de arduino.
 #ifndef DEBUG_H
 #define DEBUG_H

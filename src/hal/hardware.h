@@ -20,7 +20,6 @@
 #include "configurations.h" // Guarda los datos por defecto del equipo.
 #include "debug.h"			// Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"		// Guardado de datos a EEPROM.
-#include <Adafruit_MCP23X08.h>
 class Hardware
 {
 public:
