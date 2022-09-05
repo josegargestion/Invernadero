@@ -4,15 +4,16 @@
  * @attention
  *
  * @author Josegar1908@gmail.com
- * @version 0.0.3
+ * @version 0.5.0
  *
  * @todo
  *
  * */
-#include "utility\Debug.h"          // Biblioteca de macros de errores.
-#include "src\ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
-#include "src\invernadero.h"        // Clase maestra de control del sistema.
-#include <Arduino.h>            // STD de arduino.
+#include "Debug.h"       // Biblioteca de macros de errores.
+#include "estructuras.h" // Personal de control de tiempos del procesador y horarios.
+#include "invernadero.h" // Clase maestra de control del sistema.
+#include <Arduino.h>     // STD de arduino.
+//#include <stddef.h>
 Inver Inver1;
 millis_set mainMillis;
 void setup()

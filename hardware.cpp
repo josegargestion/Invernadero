@@ -11,27 +11,20 @@
  * @todo	- Comprobación del sistema.
  * @copyright Copyright (c) 2021
  */
-
-#include <Adafruit_MCP23X08.h>
-#include <Adafruit_MCP23X17.h>
-#include <Adafruit_MCP23XXX.h>
 #include "configurations.h" // Guarda los datos por defecto del equipo.
 #include "debug.h"          // Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"     // Guardado de datos a EEPROM.
 #include "DHT.h"            // Control sensores DHT.
-#include "debug.h"          // Necesario para las llamadas de depuración.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
 #include "ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
-#include "hardware.h"
-#include "deposito.h"    // Control sistema de deposito de liquidos
-#include "ambiente.h"    // Control del ambiente.
-#include "Iluminacion.h" // Control iluminación.
-#include "invernadero.h" // Clase maestra de control del sistema.
-#include <Arduino.h>     // STD de arduino.
-#include <Adafruit_MCP23XXX.h>
-#include "estructuras.h"
-#include "DS1307RTC.h"
-#include <Wire.h>
+#include "hardware.h"       // Biblioteca de control de hardware.
+#include "deposito.h"       // Control sistema de deposito de liquidos
+#include "ambiente.h"       // Control del ambiente.
+#include "Iluminacion.h"    // Control iluminación.
+#include "invernadero.h"    // Clase maestra de control del sistema.
+#include <Arduino.h>        // STD de arduino.
+#include "estructuras.h"    // Coleccion de estructuras comunes de proyecto.
+#include <Wire.h>           // Biblioteca i2c standar.
 const unsigned long DHT_TIEMPO_MEDIDAS = 10000;
 estado_Hardware Hardware::estadoHardware;
 config_Hardware Hardware::configHardware;
@@ -72,6 +65,7 @@ Hardware::Hardware() : sondaInterior(_HTINTPIN, _HTINTTYPE), sondaExterior(_HTEX
 }
 void Hardware::begin()
 {
+    #ifdef RTC
     DPRINTLN(F(" Antes de cargar RTC"));
     setSyncProvider(RTC.get);
     if (timeStatus() != timeSet)
@@ -82,6 +76,7 @@ void Hardware::begin()
     {
         DPRINTLN(F(" RTC has set the system time"));
     }
+    #endif
     sondaInterior.begin();
     sondaExterior.begin();
 #ifdef NANO
@@ -515,4 +510,3 @@ void Hardware::GetSensores()
     Hardware::estadoHardware.AmbienteExterno = GetSensor(sondaExterior);
     Hardware::estadoHardware.AmbienteInterno = GetSensor(sondaInterior);
 }
-
