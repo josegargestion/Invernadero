@@ -16,12 +16,9 @@
 #include "cAPPconfig.h"     // Guardado de datos a EEPROM.
 #include "DHT.h"            // Control sensores DHT.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
-#include "ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
+#include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.
 #include "hardware.h"       // Biblioteca de control de hardware.
 #include "deposito.h"       // Control sistema de deposito de liquidos
-#include "ambiente.h"       // Control del ambiente.
-#include "Iluminacion.h"    // Control iluminación.
-#include "invernadero.h"    // Clase maestra de control del sistema.
 #include <Arduino.h>        // STD de arduino.
 #include "estructuras.h"    // Coleccion de estructuras comunes de proyecto.
 #include <Wire.h>           // Biblioteca i2c standar.

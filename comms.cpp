@@ -12,4 +12,4 @@
 #include "configurations.h" // Guarda los datos por defecto del equipo.
 #include "debug.h"          // Necesario para las llamadas de depuración.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
-#include "ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
+#include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.

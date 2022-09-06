@@ -13,7 +13,7 @@
 #include "hardware.h"       // Funciones independientes del hardware.
 #include "debug.h"          // Necesario para las llamadas de depuración.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
-#include "ControlTiempos.h" // Personal de control de tiempos del procesador y horarios.
+#include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.
 extern Control_Tiempos Horario1;
 extern Hardware Sistema1;
 Iluminacion::Iluminacion()

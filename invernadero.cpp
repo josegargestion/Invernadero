@@ -1,6 +1,6 @@
 /**
  * @file invernadero.cpp
- * @brief Codigo de la biblioteca deposito.h
+ * @brief Codigo de la biblioteca invernadero.h
  * @author Jose Luis Garcia Lopez (josegar1980@gmail.com)
  * @version 0.5.0
  * @date 2022-06-23
@@ -17,12 +17,14 @@
 #include "Iluminacion.h"    // Control iluminación.
 #include "invernadero.h"    // Clase maestra de control del sistema.
 #include "hardware.h"       // Clase de control del hardware.
-#include "ControlTiempos.h" // Clase de control de horarios.
+#include "CTiempos.h"       // Clase de control de horarios.
 #include <Arduino.h>        // STD de arduino.
 cAppConfig configApp1;
 Control_Tiempos Horario1;
 Hardware Sistema1;
+#ifndef NODEPOSITO
 Deposito Deposito1;
+#endif
 Ambiente Ambiente1;
 Iluminacion Iluminacion1;
 millis_set inverMillis;
@@ -31,33 +33,24 @@ Inver::Inver()
 }
 void Inver::begin()
 {
-  DTIME;
-  DPRINTLN(F(" Inicializando modulos. "));
-  DTIME;
-  DPRINTLN(F(" Begin Sistema1"));
   Sistema1.begin();
-  DTIME;
-  DPRINTLN(F(" Begin configApp1."));
   configApp1.begin();
-  DTIME;
-  DPRINTLN(F(" Begin Iluminacion1."));
   Iluminacion1.begin();
-  DTIME;
-  DPRINTLN(F(" Begin Ambiente1"));
   Ambiente1.begin();
-  DTIME;
-  DPRINTLN(F(" Begin Deposito1"));
+  #ifndef NODEPOSITO
   Deposito1.begin();
-  DTIME;
-  DPRINTLN(F(" Carga de variables desde memoria. "));
+  #endif
   Horario1.SetTimeOn(configApp1._D.OnHora, configApp1._D.OnMinuto);
   Horario1.SetTimeOff(configApp1._D.OffHora, configApp1._D.OffMinuto);
   // Ambiente1.SetTimeOn(configApp1._D.OnHora, configApp1._D.OnMinuto, configApp1._D.OnTemp, configApp1._D.OnHr);
   // Ambiente1.SetTimeOff(configApp1._D.OffHora, configApp1._D.OffMinuto, configApp1._D.OffTemp, configApp1._D.OffHr);
 #ifdef DEBUG
+#ifndef NODEPOSITO
   configApp1._D.CalBomba = true;
   configApp1._D.CalValvula = true;
 #endif
+#endif
+#ifndef NODEPOSITO
   if (configApp1._D.CalBomba && configApp1._D.CalValvula)
   {
     DTIME;
@@ -78,11 +71,14 @@ void Inver::begin()
     DPRINTLN(F(" Guardando calibracion en EEPROM."));
     configApp1.configSave();
   }
+  #endif
 }
 void Inver::Control()
 {
   Sistema1.Control();
   Iluminacion1.Control();
   Ambiente1.Control();
+  #ifndef NODEPOSITO
   Deposito1.Control();
+  #endif
 }

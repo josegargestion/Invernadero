@@ -17,7 +17,7 @@
 #include "ambiente.h"       // Control del ambiente.
 #include "Iluminacion.h"    // Control iluminación.
 #include "debug.h"          // Necesario para las llamadas de depuración.
-#include "ControlTiempos.h" // Clase de control de horarios.
+#include "CTiempos.h" // Clase de control de horarios.
 #include <Arduino.h>        // STD de arduino.
 
 extern Control_Tiempos Horario1;

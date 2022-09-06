@@ -1,9 +1,7 @@
-#ifndef CONTROLTIEMPOS_H
-#define CONTROLTIEMPOS_H
-#include <Arduino.h>		// STD de arduino.
-#include "estructuras.h"
 /**
+ * 
  * @brief Controles para gestion de tiempos.
+ * @file CTiempos.h Biblioteca de control de tiempos.
  * Clase maestra del sistema de control de tiempos, tiene las siguientes funciones:
  * - Estructura que define las horas y minutos de los periodos.
  * - Funcion para fijar tiempo de encendido.
@@ -19,6 +17,10 @@
  * @todo - Eliminar codigo de depuracion.
  *
  */
+#ifndef CTIEMPOS_H
+#define CTIEMPOS_H
+#include <Arduino.h>		// STD de arduino.
+#include "estructuras.h"
 class Control_Tiempos
 {
 public:

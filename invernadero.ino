@@ -30,6 +30,7 @@ void loop()
   mainMillis.currentmillis = millis();
   if (mainMillis.currentmillis - mainMillis.lastmillis >= mainMillis.period)
   {
+    DPRINTLN(F(" 000 - Loop principal. "));
     Inver1.Control();
     mainMillis.lastmillis = millis();
   }

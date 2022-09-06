@@ -9,9 +9,9 @@
  *
  */
 
-#include "ControlTiempos.h"                                   // Personal de control de tiempos del procesador y horarios.
+#include "CTiempos.h"                                   // Personal de control de tiempos del procesador y horarios.
 #include "configurations.h"                                   // Guarda los datos por defecto del equipo.
-#include "Time.h"                                             // Libreria de control de tiempos.
+#include <Time.h>                                             // Libreria de control de tiempos.
 #include "DHT.h"                                              // Control sensores DHT.
 #include "debug.h"                                            // Necesario para las llamadas de depuración.
 #include <Arduino.h>                                          // STD de arduino.
