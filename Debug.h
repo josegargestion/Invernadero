@@ -14,7 +14,7 @@
 #define DEBUG_H
 #define DPRINTER Serial
 #ifndef DEBUG
-//#define DEBUG
+#define DEBUG
 #endif
 /**
  * @brief Definimos las macros si esta DEBUG activo.

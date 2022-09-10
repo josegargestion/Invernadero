@@ -25,21 +25,7 @@ class Deposito
 {
 private:
 	/**
-	 * @brief Estructura que almacena los datos privados deposito.
-	 *
-	 * @param SensonMax Estado sensor de maximo.
-	 * @param SensorMin Estado sensor de minimo.
-	 * @param EstadoBomba Estado de la bomba.
-	 */
-	struct estado_Deposito
-	{
-		bool SensorMax;		// Estado sensor de maximo.
-		bool SensorMin;		// Estado sensor de minimo.
-		bool EstadoBomba;	// Estado de la bomba.
-		bool EstadoValvula; // Estado de la electrovalvula.
-	};
-	/**
-	 * @brief Variable que contendra los datos de confiiguracion.
+	 * @brief Variable que contendra los datos de configuracion.
 	 *
 	 */
 	estado_Deposito estadoDeposito;
@@ -75,14 +61,14 @@ public:
 	 * @param pinSondaMaximo Pin desde el que leer la sonda de maximo.
 	 * @param pinSondaMinimo Pin desde el que leer la sonda de manimo.
 	 */
-	struct config_Deposito
+	struct cal_Deposito
 	{
 		bool CalBomba;					   // Calibracion realizada.
 		unsigned long TCalibracionBomba;   // Tiempo de calibracion de la bomba.
 		unsigned long TCalibracionValvula; // Tiempo de calibracion de la valvula.
 		bool CalValvula;				   // Calibracion realizada.
 	};
-	config_Deposito configDeposito;
+	cal_Deposito configDeposito;
 	/**
 	 * @brief Construct a new Deposito:: Deposito object
 	 *

@@ -18,7 +18,7 @@
 #include "estructuras.h"	// Estructuras de datos.
 #include <Arduino.h>		// STD de arduino.
 #include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "debug.h"			// Necesario para las llamadas de depuración.
+#include "Debug.h"			// Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"		// Guardado de datos a EEPROM.
 class Hardware
 {

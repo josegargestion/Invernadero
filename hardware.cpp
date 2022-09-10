@@ -12,11 +12,11 @@
  * @copyright Copyright (c) 2021
  */
 #include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "debug.h"          // Necesario para las llamadas de depuración.
+#include "Debug.h"          // Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"     // Guardado de datos a EEPROM.
 #include "DHT.h"            // Control sensores DHT.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
-#include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.
+#include "CTiempos.h"       // Personal de control de tiempos del procesador y horarios.
 #include "hardware.h"       // Biblioteca de control de hardware.
 #include "deposito.h"       // Control sistema de deposito de liquidos
 #include <Arduino.h>        // STD de arduino.
@@ -62,7 +62,7 @@ Hardware::Hardware() : sondaInterior(_HTINTPIN, _HTINTTYPE), sondaExterior(_HTEX
 }
 void Hardware::begin()
 {
-    #ifdef RTC
+#ifdef RTC
     DPRINTLN(F(" Antes de cargar RTC"));
     setSyncProvider(RTC.get);
     if (timeStatus() != timeSet)
@@ -73,7 +73,7 @@ void Hardware::begin()
     {
         DPRINTLN(F(" RTC has set the system time"));
     }
-    #endif
+#endif
     sondaInterior.begin();
     sondaExterior.begin();
 #ifdef NANO

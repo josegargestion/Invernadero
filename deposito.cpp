@@ -11,7 +11,7 @@
 #include "hardware.h"
 #include "deposito.h"		// Control sistema de deposito de liquidos
 #include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "debug.h"			// Necesario para las llamadas de depuración.
+#include "Debug.h"			// Necesario para las llamadas de depuración.
 #include "Time.h"			// Control de horas y tiempos, ademas del rtc.
 #include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.
 #include "cAPPconfig.h"		// Guardado de datos a EEPROM.
@@ -33,54 +33,54 @@ void Deposito::Control()
 	if (depositoMillis.currentmillis - depositoMillis.lastmillis >= depositoMillis.period)
 	{
 		UpdateSondas();
-		if (estadoDeposito.SensorMax && estadoDeposito.SensorMin)
+		if (estadoDeposito.EstadoSensorMax && estadoDeposito.EstadoSensorMin)
 		{
 #ifdef DEBUG
 			DTIME;
 			DPRINT(" Sensor Max : ");
-			DPRINT(estadoDeposito.SensorMax);
+			DPRINT(estadoDeposito.EstadoSensorMax);
 			DPRINT(" Sensor Min : ");
-			DPRINT(estadoDeposito.SensorMin);
+			DPRINT(estadoDeposito.EstadoSensorMin);
 			DPRINTLN();
 #endif
 			Vaciado(OFF);
 			LLenado(OFF);
 		}
-		else if (estadoDeposito.SensorMax && !estadoDeposito.SensorMin)
+		else if (estadoDeposito.EstadoSensorMax && !estadoDeposito.EstadoSensorMin)
 		{
 #ifdef DEBUG
 			DTIME;
 			DPRINT(" Sensor Max : ");
-			DPRINT(estadoDeposito.SensorMax);
+			DPRINT(estadoDeposito.EstadoSensorMax);
 			DPRINT(" Sensor Min : ");
-			DPRINT(estadoDeposito.SensorMin);
+			DPRINT(estadoDeposito.EstadoSensorMin);
 			DPRINTLN();
 #endif
 			DTIME;
 			DPRINTLN(F(" Ejecutando Control error Deposito."));
 			Sistema1.ControlErrorDeposito();
 		}
-		else if (!estadoDeposito.SensorMax && estadoDeposito.SensorMin)
+		else if (!estadoDeposito.EstadoSensorMax && estadoDeposito.EstadoSensorMin)
 		{
 #ifdef DEBUG
 			DTIME;
 			DPRINT(" Sensor Max : ");
-			DPRINT(estadoDeposito.SensorMax);
+			DPRINT(estadoDeposito.EstadoSensorMax);
 			DPRINT(" Sensor Min : ");
-			DPRINT(estadoDeposito.SensorMin);
+			DPRINT(estadoDeposito.EstadoSensorMin);
 			DPRINTLN();
 #endif
 			Vaciado(OFF);
 			LLenado(ON);
 		}
-		else if (!estadoDeposito.SensorMax && !estadoDeposito.SensorMin)
+		else if (!estadoDeposito.EstadoSensorMax && !estadoDeposito.EstadoSensorMin)
 		{
 #ifdef DEBUG
 			DTIME;
 			DPRINT(" Sensor Max : ");
-			DPRINT(estadoDeposito.SensorMax);
+			DPRINT(estadoDeposito.EstadoSensorMax);
 			DPRINT(" Sensor Min : ");
-			DPRINT(estadoDeposito.SensorMin);
+			DPRINT(estadoDeposito.EstadoSensorMin);
 			DPRINTLN();
 #endif
 			Vaciado(OFF);
@@ -92,14 +92,14 @@ void Deposito::Control()
 void Deposito::UpdateSondas()
 {
 	Sistema1.UpdateSondas();
-	estadoDeposito.SensorMax = Sistema1.GetSondaMaximo();
-	estadoDeposito.SensorMin = Sistema1.GetSondaMinimo();
+	estadoDeposito.EstadoSensorMax = Sistema1.GetSondaMaximo();
+	estadoDeposito.EstadoSensorMin = Sistema1.GetSondaMinimo();
 #ifdef DEBUG
 	DTIME;
 	DPRINT(" Sensor Max : ");
-	DPRINT(estadoDeposito.SensorMax);
+	DPRINT(estadoDeposito.EstadoSensorMax);
 	DPRINT(" Sensor Min : ");
-	DPRINT(estadoDeposito.SensorMin);
+	DPRINT(estadoDeposito.EstadoSensorMin);
 	DPRINTLN();
 #endif
 }

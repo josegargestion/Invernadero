@@ -6,18 +6,15 @@
  * @version 0.5.0
  * @date 2022-06-23
  * @copyright Copyright (c) 2021
- * 
- * @todo Pasar toda la configuracion del main aqui
- *
  */
 #ifndef INVERNADERO_H
 #define INVERNADERO_H
-
+/// @brief clase invernadero, crear con Iner <objname>; .
 class Inver
 {
 public:
-    Inver();
-    void begin();
-    void Control();
+    Inver();        /// Constructor.
+    void begin();   /// Inicializacion.
+    void Control(); /// LLamada de ejecución.
 };
 #endif

@@ -13,7 +13,7 @@
 #include "configurations.h"                                   // Guarda los datos por defecto del equipo.
 #include <Time.h>                                             // Libreria de control de tiempos.
 #include "DHT.h"                                              // Control sensores DHT.
-#include "debug.h"                                            // Necesario para las llamadas de depuración.
+#include "Debug.h"                                            // Necesario para las llamadas de depuración.
 #include <Arduino.h>                                          // STD de arduino.
 void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto) // Configura tiempo de encendido.
 {

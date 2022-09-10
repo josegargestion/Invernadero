@@ -13,6 +13,7 @@
 #define NANO_H
 
 #ifdef NANO
+#include <pins_arduino.h>
 // Configuracion de pines
 const int _pinControlSondaMaximo = 12; // 22
 const int _pinControlSondaMinimo = 11; // 21
@@ -27,8 +28,8 @@ const int _pinControlExtractor = 3;
 const int _pinControlCalefaccion = 4;
 const int _pinControlImpulsor = 6;
 const int _pinControlLampara = 7;
-const int _SDA = 23;
-const int _SCL = 24;
+const int _SDA = SDA;
+const int _SCL = SCL;
 #endif
 
 #endif

@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2021
  */
 #include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "debug.h"          // Necesario para las llamadas de depuración.
+#include "Debug.h"          // Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"     // Guardado de datos a EEPROM.
 #include "debug.h"          // Necesario para las llamadas de depuración.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
