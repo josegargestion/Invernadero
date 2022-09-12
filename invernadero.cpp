@@ -21,14 +21,12 @@
 #include <Arduino.h>        // STD de arduino.
 cAppConfig configApp1;
 Control_Tiempos Horario1;
-Hardware Sistema1;
-#ifndef NODEPOSITO
-Deposito Deposito1;
-#endif
+IHAL& Sistema1;
 Ambiente Ambiente1;
 Iluminacion Iluminacion1;
 millis_set inverMillis;
-Inver::Inver()
+
+Inver::Inver(IHAL& Sistema1) : _hal(Sistema1)
 {
 }
 void Inver::begin()
@@ -37,48 +35,14 @@ void Inver::begin()
   configApp1.begin();
   Iluminacion1.begin();
   Ambiente1.begin();
-  #ifndef NODEPOSITO
-  Deposito1.begin();
-  #endif
   Horario1.SetTimeOn(configApp1._D.OnHora, configApp1._D.OnMinuto);
   Horario1.SetTimeOff(configApp1._D.OffHora, configApp1._D.OffMinuto);
   // Ambiente1.SetTimeOn(configApp1._D.OnHora, configApp1._D.OnMinuto, configApp1._D.OnTemp, configApp1._D.OnHr);
   // Ambiente1.SetTimeOff(configApp1._D.OffHora, configApp1._D.OffMinuto, configApp1._D.OffTemp, configApp1._D.OffHr);
-#ifdef DEBUG
-#ifndef NODEPOSITO
-  configApp1._D.CalBomba = true;
-  configApp1._D.CalValvula = true;
-#endif
-#endif
-#ifndef NODEPOSITO
-  if (configApp1._D.CalBomba && configApp1._D.CalValvula)
-  {
-    DTIME;
-    DPRINTLN(F(" Cargando calibracion desde EEPROM."));
-    Sistema1.estadoHardware.CalBomba = configApp1._D.CalBomba;
-    Sistema1.estadoHardware.CalValvula = configApp1._D.CalValvula;
-    Sistema1.estadoHardware.TCalibracionBomba = configApp1._D.TCalibracionBomba;
-    Sistema1.estadoHardware.TCalibracionValvula = configApp1._D.TCalibracionValvula;
-  }
-  else
-  {
-    DTIME;
-    DPRINTLN(F(" Generando nueva calibracion."));
-    configData_t tempconfig;
-    tempconfig = Sistema1.SetCalibracion(configApp1._D);
-    configApp1._D = tempconfig;
-    DTIME;
-    DPRINTLN(F(" Guardando calibracion en EEPROM."));
-    configApp1.configSave();
-  }
-  #endif
 }
 void Inver::Control()
 {
   Sistema1.Control();
   Iluminacion1.Control();
   Ambiente1.Control();
-  #ifndef NODEPOSITO
-  Deposito1.Control();
-  #endif
 }

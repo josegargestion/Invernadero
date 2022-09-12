@@ -29,11 +29,10 @@ struct datos_sensores
 };
 /**
  * @brief Estructura que alverga los datos de temperatura y Humedad en funcion de la hora.
- * @param Hora Hora de comienzo.
- * @param Minuto Minuto de comienzo.
- * @param Temp Temperatura a mantener.
- * @param Hr Humedad a mantener.
- *
+ * @param set.Hora uint8_t Hora de comienzo.
+ * @param set.Minuto uint8_t Minuto de comienzo.
+ * @param AmbienteHora.temperatura float Temperatura a mantener.
+ * @param AmbienteHora.humedad float Humedad a mantener.
  */
 struct set_Ambiente
 {
@@ -86,7 +85,6 @@ struct config_Hardware
 };
 struct estado_Hardware
 {
-
 	bool EstadoLampara;
 	bool EstadoSensorMax;			   // Estado sensor de maximo.
 	bool EstadoSensorMin;			   // Estado sensor de minimo.

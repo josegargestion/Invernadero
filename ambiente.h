@@ -57,9 +57,9 @@ public:
 	 *
 	 */
 	void begin();
-
+    void SetControls(set_Ambiente set); /// LLeva el sistema al set indicado.
 private:
-	millis_set ambienteMillis, sensorExteriorMillis, sensorInteriorMillis;
+	millis_set ambienteMillis;
 	/**
 	 * @brief LLama a los elementos de control configurando al estado enviado.
 	 *

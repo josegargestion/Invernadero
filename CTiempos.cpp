@@ -8,48 +8,57 @@
  * @copyright Copyright (c) 2021
  *
  */
-
 #include "CTiempos.h"                                   // Personal de control de tiempos del procesador y horarios.
 #include "configurations.h"                                   // Guarda los datos por defecto del equipo.
 #include <Time.h>                                             // Libreria de control de tiempos.
-#include "DHT.h"                                              // Control sensores DHT.
 #include "Debug.h"                                            // Necesario para las llamadas de depuración.
+#include "estructuras.h"
 #include <Arduino.h>                                          // STD de arduino.
-void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto) // Configura tiempo de encendido.
+set_Horario Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto)
 {
-    setOn.Hora = Hora;
-    setOn.Minuto = Minuto;
+    set_Horario tmp;
+    tmp.Hora = Hora;
+    tmp.Minuto = Minuto;
+    return tmp;
 }
-void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto, set_Horario set) // Configura tiempo de encendido.
+set_Ambiente Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto, float Temp, float HR)
 {
-    set.Hora = Hora;
-    set.Minuto = Minuto;
+    set_Ambiente tmp;
+    tmp.set = SetTime(Hora , Minuto);
+    tmp.AmbienteHora.temperatura = Temp;
+    tmp.AmbienteHora.humedad = HR;
+    return tmp;
 }
-void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto, set_Ambiente set) // Configura tiempo de encendido.
+set_Ambiente Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto, datos_sensores sensores)
 {
-    /** @todo corregir esto
-    SetTimeOn(Hora, Minuto, setOn.set);
-    setOn. = Temp;
-    setOn.Hr = Hr;
-    **/
+    set_Ambiente tmp;
+    tmp.set = SetTime(Hora, Minuto);
+    tmp.AmbienteHora = sensores;
+    return tmp;
 }
-void Control_Tiempos::SetTimeOff(uint8_t Hora, uint8_t Minuto) // Configura el tiempo de apagado.
+void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto) 
 {
-    setOff.Hora = Hora;
-    setOff.Minuto = Minuto;
+    setOn = SetTime(Hora, Minuto);
 }
-void Control_Tiempos::SetTimeOff(uint8_t Hora, uint8_t Minuto, set_Horario set) // Configura el tiempo de apagado.
+void Control_Tiempos::SetTimeOn(set_Horario set)
 {
-    set.Hora = Hora;
-    set.Minuto = Minuto;
+    setOn = set;
 }
-void Control_Tiempos::SetTimeOff(uint8_t Hora, uint8_t Minuto, set_Ambiente set) // Configura el tiempo de apagado.
+void Control_Tiempos::SetTimeOn(set_Ambiente setA)
 {
-    /** @todo corregir esto
-    SetTimeOff(Hora, Minuto, setOn.set);
-    setOff.Temp = Temp;
-    setOff.Hr = Hr;
-    **/
+    setAOn = setA;
+}
+void Control_Tiempos::SetTimeOff(uint8_t Hora, uint8_t Minuto)
+{
+    setOff = SetTime(Hora, Minuto);
+}
+void Control_Tiempos::SetTimeOff(set_Horario set)
+{
+    setOff = set;
+}
+void Control_Tiempos::SetTimeOff(set_Ambiente setA)
+{
+    setAOff = setA;
 }
 bool Control_Tiempos::ControlOnOff(set_Horario setOn, set_Horario setOff)
 {

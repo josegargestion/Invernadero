@@ -10,13 +10,10 @@
  *
  */
 #include "configurations.h" // Guarda los datos por defecto del equipo.
-#include "DHT.h"            // Control sensores DHT.
-#include "debug.h"          // Necesario para las llamadas de depuración.
+#include "Debug.h"          // Necesario para las llamadas de depuración.
 #include "Time.h"           // Control de horas y tiempos, ademas del rtc.
 #include "hardware.h"       // Clase de control del hardware.
 #include "ambiente.h"       // Control del ambiente.
-#include "Iluminacion.h"    // Control iluminación.
-#include "debug.h"          // Necesario para las llamadas de depuración.
 #include "CTiempos.h" // Clase de control de horarios.
 #include <Arduino.h>        // STD de arduino.
 
@@ -76,4 +73,12 @@ void Ambiente::ControlExtractor(set_Ambiente set) // Control del sistema de extr
 }
 void Ambiente::ControlImpulsor(set_Ambiente set) // Control del sistema de impulsion.
 {
+}
+void Ambiente::SetControls(set_Ambiente set)
+{
+        ControlCalefaccion(set);
+        ControlHumidificador(set);
+        ControlDeshumidificador(set);
+        ControlExtractor(set);
+        ControlImpulsor(set);
 }

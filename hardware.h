@@ -20,7 +20,8 @@
 #include "configurations.h" // Guarda los datos por defecto del equipo.
 #include "Debug.h"			// Necesario para las llamadas de depuración.
 #include "cAPPconfig.h"		// Guardado de datos a EEPROM.
-class Hardware
+#include "ihal.h"			// Abstracion de hardware
+class Hardware : public IHAL
 {
 public:
 	static estado_Hardware estadoHardware;
@@ -40,38 +41,25 @@ public:
 	 * @return true Encendia
 	 * @return false Apagada
 	 */
-	static bool GetEstado();
+	bool GetEstado();
 	/**
 	 * @brief Gestion automatica de la iluminación, para controlar desde la aplicacion principal.
 	 *
 	 */
-	static void Control();
-	static bool GetEstadoIluminacion();
-	static bool GetEstadoBomba();
-	static bool GetEstadoValvula();
-	static bool GetSondaMaximo();
-	static bool GetSondaMinimo();
-	static void UpdateSondas();
-	static void ControlErrorDeposito();
-	static void EncenderValvula();
-	static void EncenderBomba();
-	static void EncenderIluminacion();
-	static void EncenderCalefaccion();
-	static void EncenderHumidificador();
-	static void EncenderDeshumidificador();
-	static void EncenderExtractor();
-	static void EncenderImpulsor();
-	static void ApagarCalefaccion();
-	static void ApagarHumidificador();
-	static void ApagarDeshumidificador();
-	static void ApagarExtractor();
-	static void ApagarImpulsor();
-	static void ApagarIluminacion();
-	static void ApagarValvula();
-	static void ApagarBomba();
-	static unsigned long GetCalibracionBomba();
-	static unsigned long GetCalibracionValvula();
-	static configData_t SetCalibracion(configData_t configAPP);
+	void Control();
+	bool GetEstadoIluminacion();
+	void EncenderIluminacion();
+	void EncenderCalefaccion();
+	void EncenderHumidificador();
+	void EncenderDeshumidificador();
+	void EncenderExtractor();
+	void EncenderImpulsor();
+	void ApagarCalefaccion();
+	void ApagarHumidificador();
+	void ApagarDeshumidificador();
+	void ApagarExtractor();
+	void ApagarImpulsor();
+	void ApagarIluminacion();
 	void GetSensores();
 
 private:

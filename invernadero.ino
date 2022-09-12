@@ -13,8 +13,9 @@
 #include "estructuras.h" // Personal de control de tiempos del procesador y horarios.
 #include "invernadero.h" // Clase maestra de control del sistema.
 #include <Arduino.h>     // STD de arduino.
-//#include <stddef.h>
-Inver Inver1;
+#include "hardware.h"    // Objeto de hardware.
+Hardware Sistema1;
+Inver Inver1(Sistema1);
 millis_set mainMillis;
 void setup()
 {
