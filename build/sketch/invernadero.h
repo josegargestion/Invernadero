@@ -1,3 +1,4 @@
+#line 1 "c:\\Users\\usuario\\Documents\\GitHub\\Inver\\invernadero.h"
 /**
  * @file invernadero.h
  * @brief Control principal del sistema.
