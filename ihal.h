@@ -14,30 +14,32 @@
 #pragma once
 #ifndef IHAL_H
 #define IHAL_H
-#include "estructuras.h"	// Estructuras de datos.
-#include <Arduino.h>		// STD de arduino.
-#include "configurations.h" // Guarda los datos por defecto del equipo.
-
+#include "estructuras.h"
 class IHAL
 {
 public:
-	static estado_Hardware estadoHardware;
+	struct IHAL_DATA
+	{
+		bool estadoIluminacion;
+		float temperatura;
+		float humedadAire;
+		float humedadTierra;
+	};
 	virtual void begin() = 0;
-	virtual bool GetEstado() = 0;
+	virtual IHAL_DATA GetEstado(IHAL_DATA set) = 0;
+	virtual bool SetEstado(IHAL_DATA set) = 0;
 	virtual void Control() = 0;
-	virtual bool GetEstadoIluminacion() = 0;
-	virtual void EncenderIluminacion() = 0;
-	virtual void EncenderCalefaccion() = 0;
-	virtual void EncenderHumidificador() = 0;
-	virtual void EncenderDeshumidificador() = 0;
-	virtual void EncenderExtractor() = 0;
-	virtual void EncenderImpulsor() = 0;
-	virtual void ApagarCalefaccion() = 0;
-	virtual void ApagarHumidificador() = 0;
-	virtual void ApagarDeshumidificador() = 0;
-	virtual void ApagarExtractor() = 0;
-	virtual void ApagarImpulsor() = 0;
-	virtual void ApagarIluminacion() = 0;
-	virtual void GetSensores() = 0;
+	virtual bool GetIluminacion() = 0;
+	virtual void SetIluminacion(bool set) = 0;
+	virtual void ControlIluminacion() = 0;
+	virtual void GetTemperatura() = 0;
+	virtual void SetTemperatura() = 0;
+	virtual void ControlTemperatura() = 0;
+	virtual void GetHumedadAire() = 0;
+	virtual void SetHumedadAire() = 0;
+	virtual void ControlHumedadAire() = 0;
+	virtual void GetHumedadTierra() = 0;
+	virtual void SetHumedadTierra() = 0;
+	virtual void ControlHumedadTierra() = 0;
 };
 #endif

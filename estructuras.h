@@ -1,6 +1,7 @@
 #ifndef ESTRUCTURAS_H
 #define ESTRUCTURAS_H
 #include <Arduino.h>
+#include "enums.h"
 /**
  * @brief Estructura de medicion de tiempos para comparaciones horarias.
  *
@@ -53,6 +54,10 @@ struct millis_set
 	unsigned long lastmillis;	 // Tiempo de la ultima ejecucion.
 	unsigned long period;		 // Lapso de tiempo entre ejecuciones, defecto _DEFECTO_PERIODO
 };
+/**
+ * @brief 
+ * 
+ */
 struct config_Hardware
 {
 	/** Pines de estado **/
@@ -83,7 +88,14 @@ struct config_Hardware
 	uint8_t pinExt;	 // Pin del sensor exterior.
 	uint8_t typeExt; // Tipo de sensor exterior.
 };
-struct estado_Hardware
+struct cal_Deposito
+{
+	bool CalBomba;					   // Calibracion realizada.
+	unsigned long TCalibracionBomba;   // Tiempo de calibracion de la bomba.
+	unsigned long TCalibracionValvula; // Tiempo de calibracion de la valvula.
+	bool CalValvula;				   // Calibracion realizada.
+};
+/*struct estado_Hardware
 {
 	bool EstadoLampara;
 	bool EstadoSensorMax;			   // Estado sensor de maximo.
@@ -101,7 +113,7 @@ struct estado_Hardware
 	unsigned long TCalibracionValvula; // Tiempo de calibracion de la valvula.
 	datos_sensores AmbienteInterno;
 	datos_sensores AmbienteExterno;
-};
+};*/
 /**
  * @brief Definir estructura de los datos a guardar en la EEPROM configData_t archivo estructuras.h .
  *
@@ -133,22 +145,21 @@ struct configData_t
 struct config_Deposito
 {
 	/** Pines de estado **/
-	int pinEstadoValvula;		   // Pin de la electrovalvula.
-	int pinEstadoBomba;			   // Pin de la bomba.
-	int pinEstadoSondaMaximo;	   // Pin sonda de Maximo.
-	int pinEstadoSondaMinimo;	   // Pin de la sonda de Minimo.
+	int pinEstadoValvula;	  // Pin de la electrovalvula.
+	int pinEstadoBomba;		  // Pin de la bomba.
+	int pinEstadoSondaMaximo; // Pin sonda de Maximo.
+	int pinEstadoSondaMinimo; // Pin de la sonda de Minimo.
 	/** Pines de configuracion **/
-	int pinControlValvula;			// Pin de la electrovalvula.
-	int pinControlBomba;			// Pin de la bomba.
-	int pinControlSondaMaximo;		// Pin sonda de Maximo.
-	int pinControlSondaMinimo;		// Pin de la sonda de Minimo.
-
+	int pinControlValvula;	   // Pin de la electrovalvula.
+	int pinControlBomba;	   // Pin de la bomba.
+	int pinControlSondaMaximo; // Pin sonda de Maximo.
+	int pinControlSondaMinimo; // Pin de la sonda de Minimo.
 };
 struct estado_Deposito
 {
-	bool EstadoSensorMax;			   // Estado sensor de maximo.
-	bool EstadoSensorMin;			   // Estado sensor de minimo.
-	bool EstadoBomba;				   // Estado de la bomba.
-	bool EstadoValvula;				   // Estado de la electrovalvula.
+	bool EstadoSensorMax; // Estado sensor de maximo.
+	bool EstadoSensorMin; // Estado sensor de minimo.
+	bool EstadoBomba;	  // Estado de la bomba.
+	bool EstadoValvula;	  // Estado de la electrovalvula.
 };
 #endif

@@ -16,6 +16,7 @@ class Inver
 {
 public:
     IHAL &_hal;
+    Inver();
     Inver(IHAL &_hal); /// Constructor.
     void begin();          /// Inicializacion.
     void Control();        /// LLamada de ejecucion.

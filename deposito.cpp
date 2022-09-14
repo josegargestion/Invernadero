@@ -15,7 +15,7 @@
 #include "Time.h"			// Control de horas y tiempos, ademas del rtc.
 #include "CTiempos.h" // Personal de control de tiempos del procesador y horarios.
 #include "cAPPconfig.h"		// Guardado de datos a EEPROM.
-extern Hardware Sistema1;
+IHAL& Sistema1;
 Deposito::Deposito()
 {
 }
@@ -89,9 +89,9 @@ void Deposito::Control()
 		depositoMillis.lastmillis = millis();
 	}
 }
-void Deposito::UpdateSondas()
+Estado_HAL_Deposito Deposito::UpdateEstado()
 {
-	Sistema1.UpdateSondas();
+	Sistema1.UpdateEstado();
 	estadoDeposito.EstadoSensorMax = Sistema1.GetSondaMaximo();
 	estadoDeposito.EstadoSensorMin = Sistema1.GetSondaMinimo();
 #ifdef DEBUG
@@ -107,21 +107,21 @@ void Deposito::Vaciado(bool estado)
 {
 	if (estado)
 	{
-		Sistema1.EncenderBomba();
+		Sistema1.VaciarDeposito();
 	}
 	else if (!estado)
 	{
-		Sistema1.ApagarBomba();
+		Sistema1.LLenarDeposito();
 	}
 }
 void Deposito::LLenado(bool estado)
 {
 	if (estado)
 	{
-		Sistema1.EncenderValvula();
+		Sistema1.LLenarDeposito();
 	}
 	else if (!estado)
 	{
-		Sistema1.ApagarValvula();
+		Sistema1.VaciarDeposito();
 	}
 }

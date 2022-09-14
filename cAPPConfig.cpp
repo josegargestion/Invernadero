@@ -1,3 +1,13 @@
+/**
+ * @file cAPPConfig.cpp
+ * @author Jose Luis Garcia Lopez (josegar1980@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-09-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "EEPROM.h"
 #include "configurations.h" // Guarda los datos por defecto del equipo.
 #include "Debug.h"          // Necesario para las llamadas de depuración.
@@ -7,7 +17,6 @@
 #include "estructuras.h"
 #include "cAPPconfig.h"
 #include <Arduino.h> // STD de arduino.
-
 void cAppConfig::begin()
 {
     DTIME;

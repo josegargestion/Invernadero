@@ -26,7 +26,8 @@ Ambiente Ambiente1;
 Iluminacion Iluminacion1;
 millis_set inverMillis;
 
-Inver::Inver(IHAL& Sistema1) : _hal(Sistema1)
+Inver::Inver()
+Inver::Inver(IHAL &_hal) : _hal(Sistema1)
 {
 }
 void Inver::begin()

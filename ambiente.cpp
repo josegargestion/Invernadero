@@ -16,9 +16,8 @@
 #include "ambiente.h"       // Control del ambiente.
 #include "CTiempos.h" // Clase de control de horarios.
 #include <Arduino.h>        // STD de arduino.
-
 extern Control_Tiempos Horario1;
-extern Hardware Sistema1;
+IHAL& Sistema1;
 Ambiente::Ambiente()
 {
     ambienteMillis.lastmillis = 0;
@@ -35,7 +34,7 @@ void Ambiente::Control()
     ambienteMillis.currentmillis = millis();
     if (ambienteMillis.currentmillis - ambienteMillis.lastmillis >= ambienteMillis.period) // Ejecutar solo si han pasado mas de period.
     {
-        CallControls(Horario1.ControlOnOff(Horario1.setAOn, Horario1.setAOff));
+        CallControls(Horario1.ControlOnOff(Horario1.setAOn.set, Horario1.setAOff.set));
         ambienteMillis.lastmillis = millis();
     }
 }
@@ -44,41 +43,36 @@ void Ambiente::CallControls(bool estado) // LLamada a los elementos de control a
     Sistema1.GetSensores();
     if (estado)
     {
-        ControlCalefaccion(setOn);
-        ControlHumidificador(setOn);
-        ControlDeshumidificador(setOn);
-        ControlExtractor(setOn);
-        ControlImpulsor(setOn);
+        ControlTemperatura(setOn);
+        ControlHumedadAire(setOn);
+        ControlHumedadTierra(setOn);
+        ControlIluminacion(setOn);
     }
     else if (!estado)
     {
-        ControlCalefaccion(setOff);
-        ControlHumidificador(setOff);
-        ControlDeshumidificador(setOff);
-        ControlExtractor(setOff);
-        ControlImpulsor(setOff);
+        ControlTemperatura(setOff);
+        ControlHumedadAire(setOff);
+        ControlHumedadTierra(setOff);
+        ControlIluminacion(setOff);
+    
     }
 }
-void Ambiente::ControlCalefaccion(set_Ambiente set) // Control de la calefaccion.
+void Ambiente::ControlTemperatura(set_Ambiente set) // Control de la calefaccion.
 {
 }
-void Ambiente::ControlHumidificador(set_Ambiente set) // Control del sistema de humidificacion.
+void Ambiente::ControlHumedadAire(set_Ambiente set) // Control del sistema de humidificacion.
 {
 }
-void Ambiente::ControlDeshumidificador(set_Ambiente set) // Control del sistema de des-humidificacion.
+void Ambiente::ControlHumedadTierra(set_Ambiente set) // Control del sistema de des-humidificacion.
 {
 }
-void Ambiente::ControlExtractor(set_Ambiente set) // Control del sistema de extraccion.
-{
-}
-void Ambiente::ControlImpulsor(set_Ambiente set) // Control del sistema de impulsion.
+void Ambiente::ControlIluminacion(set_Ambiente set) // Control del sistema de extraccion.
 {
 }
 void Ambiente::SetControls(set_Ambiente set)
 {
-        ControlCalefaccion(set);
-        ControlHumidificador(set);
-        ControlDeshumidificador(set);
-        ControlExtractor(set);
-        ControlImpulsor(set);
+        ControlTemperatura(set);
+        ControlHumedadAire(set);
+        ControlHumedadTierra(set);
+        ControlIluminacion(set);
 }

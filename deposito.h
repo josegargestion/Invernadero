@@ -21,9 +21,10 @@
 #ifndef DEPOSITO_H
 #define DEPOSITO_H
 #include "estructuras.h"
-class Deposito
+#include "IDeposito.h"
+class Deposito : public IDeposito
 {
-private:
+public:
 	/**
 	 * @brief Variable que contendra los datos de configuracion.
 	 *
@@ -50,9 +51,7 @@ private:
 	 * @brief Actualiza estadoDeposito.SensorMax y estadoDeposito.SensorMin.
 	 *
 	 */
-	void UpdateSondas();
-
-public:
+	Estado_HAL_Deposito UpdateEstado();
 	/**
 	 * @brief Estructura que almacena los datos publicos.
 	 *

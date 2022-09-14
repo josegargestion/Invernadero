@@ -8,12 +8,19 @@
  * @copyright Copyright (c) 2021
  *
  */
-#include "CTiempos.h"                                   // Personal de control de tiempos del procesador y horarios.
-#include "configurations.h"                                   // Guarda los datos por defecto del equipo.
-#include <Time.h>                                             // Libreria de control de tiempos.
-#include "Debug.h"                                            // Necesario para las llamadas de depuración.
-#include "estructuras.h"
-#include <Arduino.h>                                          // STD de arduino.
+#include "CTiempos.h"       // Personal de control de tiempos del procesador y horarios.
+#include "configurations.h" // Guarda los datos por defecto del equipo.
+#include <Time.h>           // Libreria de control de tiempos.
+#include "Debug.h"          // Necesario para las llamadas de depuración.
+#include "estructuras.h"    // Estructuras globales del sistema.
+#include <Arduino.h>        // STD de arduino.
+Control_Tiempos::Control_Tiempos()
+{
+    setAOn.set.Hora = setOn.Hora;
+    setAOn.set.Minuto = setOn.Minuto;
+    setAOff.set.Hora = setOff.Hora;
+    setAOff.set.Minuto = setOff.Minuto;
+}
 set_Horario Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto)
 {
     set_Horario tmp;
@@ -24,7 +31,7 @@ set_Horario Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto)
 set_Ambiente Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto, float Temp, float HR)
 {
     set_Ambiente tmp;
-    tmp.set = SetTime(Hora , Minuto);
+    tmp.set = SetTime(Hora, Minuto);
     tmp.AmbienteHora.temperatura = Temp;
     tmp.AmbienteHora.humedad = HR;
     return tmp;
@@ -36,7 +43,7 @@ set_Ambiente Control_Tiempos::SetTime(uint8_t Hora, uint8_t Minuto, datos_sensor
     tmp.AmbienteHora = sensores;
     return tmp;
 }
-void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto) 
+void Control_Tiempos::SetTimeOn(uint8_t Hora, uint8_t Minuto)
 {
     setOn = SetTime(Hora, Minuto);
 }
@@ -60,6 +67,7 @@ void Control_Tiempos::SetTimeOff(set_Ambiente setA)
 {
     setAOff = setA;
 }
+/*
 bool Control_Tiempos::ControlOnOff(set_Horario setOn, set_Horario setOff)
 {
     bool control_return = false;
@@ -150,5 +158,100 @@ bool Control_Tiempos::ControlOnOff(set_Ambiente setAOn, set_Ambiente setAOff)
             DPRINTLN(F(" ECT - 002 No ha caido en las otras condiciones. "));
         }
     }
+    return control_return;
+}
+*/
+bool Control_Tiempos::ControlOnOff(set_Horario setOn, set_Horario setOff)
+{
+    time_t t = now();
+    bool control_return = false;
+    if (setOn.Hora < setOff.Hora) // Si la hora de encendido esta antes de la de apagado.
+    {
+        if (((int)setOn.Hora == hour(t)) && ((int)setOn.Minuto > minute(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOn.Hora == hour(t)) && ((int)setOn.Minuto <= minute(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOff.Hora == hour(t)) && ((int)setOff.Minuto < minute(t))) //  Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOff.Hora == hour(t)) && ((int)setOff.Minuto >= minute(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora > hour(t)) && ((int)setOn.Hora > hour(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora < hour(t)) && ((int)setOn.Hora > hour(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOff.Hora < hour(t)) && ((int)setOn.Hora < hour(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora > hour(t)) && ((int)setOn.Hora < hour(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else // Si todo falla.
+        {
+            DTIME;
+            DPRINTLN(F(" ECT - 001 No ha caido en las otras condiciones. "));
+        }
+    }
+    else if (setOn.Hora > setOff.Hora) // Si la hora de encendido esta despues de la de apagado.
+    {
+        if (((int)setOn.Hora == hour(t)) && ((int)setOn.Minuto < minute(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOn.Hora == hour(t)) && ((int)setOn.Minuto >= minute(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora > hour(t)) && ((int)setOn.Hora > hour(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOff.Hora == hour(t)) && ((int)setOff.Minuto <= minute(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora == hour(t)) && ((int)setOff.Minuto > minute(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else if (((int)setOff.Hora < hour(t)) && ((int)setOn.Hora > hour(t))) // Apagado.
+        {
+            control_return = false;
+        }
+        else if (((int)setOff.Hora < hour(t)) && ((int)setOn.Hora < hour(t))) // Encendido.
+        {
+            control_return = true;
+        }
+        else // Si todo falla.
+        {
+            DTIME;
+            DPRINTLN(F(" ECT - 002 No ha caido en las otras condiciones. "));
+        }
+    }
+    return control_return;
+}
+bool Control_Tiempos::ControlOnOff(set_Ambiente setAOn, set_Ambiente setAOff)
+{
+    bool control_return = false;
+    control_return = ControlOnOff(setAOn.set, setAOff.set);
+    return control_return;
+}
+bool Control_Tiempos::ControlOnOff()
+{
+    bool control_return = false;
+    control_return = ControlOnOff(setAOn.set, setAOff.set);
     return control_return;
 }

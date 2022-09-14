@@ -67,34 +67,29 @@ private:
 	 */
 	void CallControls(bool estado);
 	/**
-	 * @brief Controla el sistema de calefaccion para llegar a los parametros enviados.
+	 * @brief Controla la Temperatura.
 	 *
 	 * @param set Envia los parametros a configurar.
 	 */
-	void ControlCalefaccion(set_Ambiente set);
+	void ControlTemperatura(set_Ambiente set);
 	/**
 	 * @brief Controla el sistema de humidificacion para llegar a los parametros enviados.
 	 *
 	 * @param set Envia los parametros a configurar.
 	 */
-	void ControlHumidificador(set_Ambiente set);
+	void ControlHumedadAire(set_Ambiente set);
 	/**
-	 * @brief Controla el sistema de des-humidificacion.
+	 * @brief Control Humedad tierra
+	 * 
+	 * @param set 
+	 * @todo Pendiente de implementar.
+	 */
+	void ControlHumedadTierra(set_Ambiente set); 
+	/**
+	 * @brief Controla el sistema de Iluminacion.
 	 *
 	 * @param set Envia los parametros a configurar.
 	 */
-	void ControlDeshumidificador(set_Ambiente set);
-	/**
-	 * @brief Controla el sistema de extraccion.
-	 *
-	 * @param set Envia los parametros a configurar.
-	 */
-	void ControlExtractor(set_Ambiente set);
-	/**
-	 * @brief Controla el sistema de impulsion.
-	 *
-	 * @param set Envia los parametros a configurar.
-	 */
-	void ControlImpulsor(set_Ambiente set);
+	void ControlIluminacion(set_Ambiente set);
 };
 #endif

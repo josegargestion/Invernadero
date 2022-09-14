@@ -1,22 +1,20 @@
 /**
- * @brief
- *
- * @attention
- *
- * @author Josegar1908@gmail.com
- * @version 0.5.0
- *
- * @todo
- *
- * */
+ * @file Inver.ino
+ * @author Jose Luis Garcia Lopez (josegar1980@gmail.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-09-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "Debug.h"       // Biblioteca de macros de errores.
 #include "estructuras.h" // Personal de control de tiempos del procesador y horarios.
 #include "invernadero.h" // Clase maestra de control del sistema.
 #include <Arduino.h>     // STD de arduino.
-#include "hardware.h"    // Objeto de hardware.
-Hardware Sistema1;
-Inver Inver1(Sistema1);
+Inver Inver1;
 millis_set mainMillis;
+
 void setup()
 {
   mainMillis.currentmillis = millis();

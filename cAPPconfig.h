@@ -19,7 +19,7 @@
  * @author Josegar1908@gmail.com
  * @version 0.0.3
  *
- *
+ * @file cAPPconfig.h
  */
 class cAppConfig
 {

@@ -1,21 +1,15 @@
 /**
- *
- * @brief Controles para gestion de tiempos.
- * @file CTiempos.h Biblioteca de control de tiempos.
- * Clase maestra del sistema de control de tiempos, tiene las siguientes funciones:
- * - Estructura que define las horas y minutos de los periodos.
- * - Funcion para fijar tiempo de encendido.
- * - Funcion para fijar tiempo de apagado.
- * - una funcion para controlar el sistema automaticamente en base a los datos guardados.
- *
+ * @file CTiempos.h
  * @author Jose Luis Garcia Lopez (josegar1980@gmail.com)
- * @version 0.5.0
- * @date 2022-06-23
- * @copyright Copyright (c) 2021
- *
- * @todo - Comprobacion de funcionamiento.
- * @todo - Eliminar codigo de depuracion.
- *
+ * @brief Biblioteca gestion horas de encendido - apagado.
+ * La biblioteca proporciona una estructura base set_Horaio, sobre la que aplicar la comprobación
+ * asi como metodos para modificar los datos de esta estructura con diferentes sobrecargas.
+ * @version 0.1
+ * @date 2022-09-13
+ * @todo Crear una funcion - estructura virtual que pueda ser empleada 
+ * para implementar una funcion aplicable a otros programas.
+ * @copyright Copyright (c) 2022
+ * 
  */
 #ifndef CTIEMPOS_H
 #define CTIEMPOS_H
@@ -31,6 +25,7 @@ public:
 	 */
 	set_Horario setOn, setOff;
 	set_Ambiente setAOn, setAOff;
+	Control_Tiempos();
 	/**
 	 * @brief Genera un set_Horario a partir de una Hora y un Minuto dados.
 	 * @param Hora uint8_t Hora a asignar.
@@ -112,6 +107,7 @@ public:
 	 * @return false Apagado.
 	 */
 	bool ControlOnOff(set_Ambiente setAOn, set_Ambiente setAOff);
-	bool ControlOnOff(set_Horario setAOn, set_Horario setAOff);
+	bool ControlOnOff(set_Horario setOn, set_Horario setOff);
+	bool ControlOnOff();
 };
 #endif
